@@ -35,7 +35,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnswerCell" rowHeight="100" id="ec7-bb-KVF">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnswerCell" rowHeight="100" id="ec7-bb-KVF">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ec7-bb-KVF" id="4p5-FB-KU3">
@@ -43,10 +43,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="59.5" translatesAutoresizingMaskIntoConstraints="NO" id="QJM-W9-Vze">
-                                                            <rect key="frame" x="20" y="20" width="364" height="59.5"/>
+                                                            <rect key="frame" x="20" y="0.0" width="364" height="79.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BB0-bN-AQ4">
-                                                                    <rect key="frame" x="30" y="30" width="42" height="21"/>
+                                                                    <rect key="frame" x="30" y="30" width="42" height="19.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -64,7 +64,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="right" secondItem="QJM-W9-Vze" secondAttribute="right" constant="30" id="W2U-ix-xks"/>
                                                         <constraint firstAttribute="bottom" secondItem="QJM-W9-Vze" secondAttribute="bottom" constant="20" id="ggC-jC-OUf"/>
-                                                        <constraint firstItem="QJM-W9-Vze" firstAttribute="top" secondItem="4p5-FB-KU3" secondAttribute="top" constant="20" id="oEX-e5-HCP"/>
+                                                        <constraint firstItem="QJM-W9-Vze" firstAttribute="top" secondItem="4p5-FB-KU3" secondAttribute="top" id="oEX-e5-HCP"/>
                                                         <constraint firstItem="QJM-W9-Vze" firstAttribute="leading" secondItem="4p5-FB-KU3" secondAttribute="leading" constant="20" id="zmd-cz-02V"/>
                                                     </constraints>
                                                 </tableViewCellContentView>

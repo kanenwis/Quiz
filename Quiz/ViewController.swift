@@ -17,6 +17,7 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
     var model = QuizModel()
     var questions = [Question]()
     var questionIndex = 0
+    var numCorrect = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,29 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         tableView.dataSource = self
         tableView.delegate = self
         
+        // Configure the tableview for dynamic row height
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
+        
         // Set self as delegate for model and call get questions
         model.delegate = self
         model.getQuestions()
+    }
+    
+    func displayQuestion() {
+        
+        // Check that the current questions index is not beyond the bounds of the questions array
+        guard questionIndex < questions.count else {
+            print("Trying to display a question index that is out of bounds")
+            return
+        }
+        
+        // Display the question
+        questionLabel.text = questions[questionIndex].question!
+        
+        //Display the answers
+        tableView.reloadData()
+        
     }
 
     // MARK: - QuizProtocol methods
@@ -37,8 +58,8 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         //Set our questions property with the questions from quiz model
         self.questions = questions
         
-        // Tell the tableview to reload data
-        tableView.reloadData()
+        // Display the first question
+        displayQuestion()
     }
     
     // MARK: - TableView Protocol Methods
@@ -58,7 +79,9 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         // Get the label
         let label = cell.viewWithTag(1) as! UILabel
         
-        // TODO: Set the text for the label
+        // Set the text for the label
+        
+        label.text = questions[questionIndex].answers![indexPath.row]
         
         return cell
         
@@ -67,6 +90,20 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // User has selected an answer
+        if questions[questionIndex].correctAnswerIndex! ==
+            indexPath.row {
+            
+            // User has selected the correct answer
+            numCorrect += 1
+        }
+        else {
+            // User has selected the wrong answer
+        }
+        
+        // Increment the question index to advance to the next question
+        questionIndex += 1
+        displayQuestion()
+        
         
     }
     
