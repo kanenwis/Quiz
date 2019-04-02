@@ -62,9 +62,9 @@
 			children = (
 				9140A3E222510BE70026A244 /* AppDelegate.swift */,
 				9140A3E422510BE70026A244 /* ViewController.swift */,
+				9140A3F422510C650026A244 /* Question.swift */,
 				913358E82251D34500E7F002 /* QuestionData.json */,
 				9140A3E622510BE70026A244 /* Main.storyboard */,
-				9140A3F422510C650026A244 /* Question.swift */,
 				9140A3F622510D430026A244 /* QuizModel.swift */,
 				9140A3E922510BE80026A244 /* Assets.xcassets */,
 				9140A3EB22510BE80026A244 /* LaunchScreen.storyboard */,
