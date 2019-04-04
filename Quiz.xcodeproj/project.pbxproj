@@ -16,6 +16,7 @@
 		9140A3F522510C650026A244 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9140A3F422510C650026A244 /* Question.swift */; };
 		9140A3F722510D430026A244 /* QuizModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9140A3F622510D430026A244 /* QuizModel.swift */; };
 		91F0ED112254EFA1004EA2BD /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0ED102254EFA1004EA2BD /* ResultViewController.swift */; };
+		91F0ED132255C70D004EA2BD /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F0ED122255C70D004EA2BD /* StateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		9140A3F422510C650026A244 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		9140A3F622510D430026A244 /* QuizModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModel.swift; sourceTree = "<group>"; };
 		91F0ED102254EFA1004EA2BD /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		91F0ED122255C70D004EA2BD /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				9140A3E222510BE70026A244 /* AppDelegate.swift */,
+				91F0ED122255C70D004EA2BD /* StateManager.swift */,
 				9140A3E422510BE70026A244 /* ViewController.swift */,
 				91F0ED102254EFA1004EA2BD /* ResultViewController.swift */,
 				9140A3F422510C650026A244 /* Question.swift */,
@@ -151,6 +154,7 @@
 				91F0ED112254EFA1004EA2BD /* ResultViewController.swift in Sources */,
 				9140A3F722510D430026A244 /* QuizModel.swift in Sources */,
 				9140A3F522510C650026A244 /* Question.swift in Sources */,
+				91F0ED132255C70D004EA2BD /* StateManager.swift in Sources */,
 				9140A3E522510BE70026A244 /* ViewController.swift in Sources */,
 				9140A3E322510BE70026A244 /* AppDelegate.swift in Sources */,
 			);
