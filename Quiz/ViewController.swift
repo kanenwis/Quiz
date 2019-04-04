@@ -90,13 +90,11 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         let label = cell.viewWithTag(1) as! UILabel
         
         // Set the text for the label
-        
         label.text = questions[questionIndex].answers![indexPath.row]
         
         return cell
-        
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // Check against question index being out of bounds
@@ -104,11 +102,10 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
             return
         }
         
-        
         // Declare variables for the popup
         var title:String = ""
-        var message:String = questions[questionIndex].feedback!
-        var action:String = ""
+        let message:String = questions[questionIndex].feedback!
+        let action:String = "Next"
         
         // User has selected an answer
         if questions[questionIndex].correctAnswerIndex! ==
@@ -122,36 +119,41 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         }
         else {
             // User has selected the wrong answer
+            
+            // Set the title for the popup
             title = "Wrong!"
         }
         
         // Display the popup
         
         if resultVC != nil {
-
-            // Display the popup
-            present(resultVC!, animated: true, completion: {
-                // Set the message for the popup
-                self.resultVC!.setPopup(withTitle: title, withMessage: message, withAction: action)
-        })
+            
+            // let the main thread display the popup
+            // Fixes the issue Students encountered here: https://academy.codewithchris.com/courses/258388/lectures/4261621
+            DispatchQueue.main.async {
+                self.present(self.resultVC!, animated: true, completion: {
+                    // Set the message for the popup:
+                    self.resultVC!.setPopup(withTitle: title, withMessage: message, withAction: action)
+                })
+            }
+        }
         
         // Increment the question index to advance to the next question
         questionIndex += 1
     }
     
-    // MARK: - ResultViewControllerProtocol Methods
+    // MARK: - ResultViewControllerProtocol methods
     
     func resultViewDismissed() {
         
         // Check the question index
         
-        // If the question index == question count then we have finsished the last question
+        // If the question index == question count then we've finished the last question
         if questionIndex == questions.count {
             
             // Show summary
             if resultVC != nil {
-                
-                present(resultVC!, animated: true, completion:  {
+                present(resultVC!, animated: true, completion: {
                     
                     self.resultVC?.setPopup(withTitle: "Summary", withMessage: "You got \(self.numCorrect) out of \(self.questions.count) correct.", withAction: "Restart")
                 })
@@ -161,20 +163,18 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
         }
         else if questionIndex > questions.count {
             
-            //Restart the quiz
+            // Restart the quiz
             numCorrect = 0
             questionIndex = 0
             displayQuestion()
-            
         }
         else {
-    
-        // Display the next question when the result has been dismissed
-        displayQuestion()
+            
+            // Display the next question when the result view has been dismissed
+            displayQuestion()
         }
+    }
     
-   }
-
 }
 
-}
+
