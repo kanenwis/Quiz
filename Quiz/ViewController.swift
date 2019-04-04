@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UITableViewDelegate, ResultViewControllerProtocol {
     
     @IBOutlet weak var questionLabel: UILabel!
     
@@ -18,9 +18,19 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
     var questions = [Question]()
     var questionIndex = 0
     var numCorrect = 0
-
+    
+    var resultVC: ResultViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up the result dialog view controller
+        resultVC =
+            storyboard?.instantiateViewController(withIdentifier:
+            "ResultVC") as? ResultViewController
+        resultVC?.delegate = self
+        resultVC?.modalPresentationStyle = .overCurrentContext
+        
         // Conform to the table view protocols
         tableView.dataSource = self
         tableView.delegate = self
@@ -89,23 +99,82 @@ class ViewController: UIViewController, QuizProtocol, UITableViewDataSource, UIT
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        // Check against question index being out of bounds
+        guard questionIndex < questions.count else {
+            return
+        }
+        
+        
+        // Declare variables for the popup
+        var title:String = ""
+        var message:String = questions[questionIndex].feedback!
+        var action:String = ""
+        
         // User has selected an answer
         if questions[questionIndex].correctAnswerIndex! ==
             indexPath.row {
             
             // User has selected the correct answer
             numCorrect += 1
+            
+            // Set the title for the popup
+            title = "Correct!"
         }
         else {
             // User has selected the wrong answer
+            title = "Wrong!"
         }
+        
+        // Display the popup
+        
+        if resultVC != nil {
+
+            // Display the popup
+            present(resultVC!, animated: true, completion: {
+                // Set the message for the popup
+                self.resultVC!.setPopup(withTitle: title, withMessage: message, withAction: action)
+        })
         
         // Increment the question index to advance to the next question
         questionIndex += 1
-        displayQuestion()
-        
-        
     }
     
+    // MARK: - ResultViewControllerProtocol Methods
+    
+    func resultViewDismissed() {
+        
+        // Check the question index
+        
+        // If the question index == question count then we have finsished the last question
+        if questionIndex == questions.count {
+            
+            // Show summary
+            if resultVC != nil {
+                
+                present(resultVC!, animated: true, completion:  {
+                    
+                    self.resultVC?.setPopup(withTitle: "Summary", withMessage: "You got \(self.numCorrect) out of \(self.questions.count) correct.", withAction: "Restart")
+                })
+            }
+            
+            questionIndex += 1
+        }
+        else if questionIndex > questions.count {
+            
+            //Restart the quiz
+            numCorrect = 0
+            questionIndex = 0
+            displayQuestion()
+            
+        }
+        else {
+    
+        // Display the next question when the result has been dismissed
+        displayQuestion()
+        }
+    
+   }
+
 }
 
+}
