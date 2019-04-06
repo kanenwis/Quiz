@@ -37,6 +37,21 @@ class ResultViewController: UIViewController {
         // Set rounded corners for the dialog view
         dialogView.layer.cornerRadius = 10
         
+        // Set the alpha for the dim view and elements to zero
+        dimView.alpha = 0
+        resultLabel.alpha = 0
+        feedbackLabel.alpha = 0
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        // Animate the dim in
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            
+            self.dimView.alpha = 1
+            
+        }, completion: nil)
     }
     
     func setPopup(withTitle:String, withMessage:String, withAction:String) {
@@ -44,18 +59,33 @@ class ResultViewController: UIViewController {
         resultLabel.text = withTitle
         feedbackLabel.text = withMessage
         dismissButton.setTitle(withAction, for: .normal)
+        
+        // Fade in the labels
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            
+            self.resultLabel.alpha = 1
+            self.feedbackLabel.alpha = 1
+            
+        }, completion: nil)
     }
     
     @IBAction func dismissTapped(_ sender: UIButton) {
         
-        self.dismiss(animated: true, completion: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             
-            // Clear the labels
-            self.resultLabel.text = ""
-            self.feedbackLabel.text = ""
+            self.dimView.alpha = 0
+            
+        }) { (completed) in
+            
+            // Only dismiss after dim view faded out
+            self.dismiss(animated: true, completion: {
+                
+                // Clear the labels
+                self.resultLabel.text = ""
+                self.feedbackLabel.text = ""
             
         })
-        delegate?.resultViewDismissed()
+        self.delegate?.resultViewDismissed()
         
     }
     
@@ -68,5 +98,7 @@ class ResultViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
 
 }
